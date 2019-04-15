@@ -1,4 +1,5 @@
 // pages/developed/developed.js
+var app = getApp();
 Page({
 
   /**

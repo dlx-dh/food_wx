@@ -10,12 +10,12 @@
     </view>
     <view class="main">
       <view class="addr_item">
-        <label>收货人</label>
-        <input placeholder="姓名" type="text" value="{{user}}" bindblur="userBlur" />
+        <label>姓名</label>
+        <input placeholder="仅用于联系你使用" type="text" value="{{user}}" bindblur="userBlur" />
       </view>
       <view class="addr_item">
-        <label>联系方式</label>
-        <input placeholder="手机号码" type="number" maxlength="11" value="{{mobile}}" bindblur="mobileBlur" />
+        <label>联系电话</label>
+        <input placeholder="仅用于联系你使用" type="number" maxlength="11" value="{{mobile}}" bindblur="mobileBlur" />
       </view>
       <view class="addr_item full_addr">
         <picker range='{{customers_type}}' value='{{_id}}' bindchange='bindStartMultiPickerChange' range-key="_id" data-id='{{customers_type[index]._id}}'>
@@ -26,13 +26,10 @@
       </view>
       <view class="addr_item full_addr">
         <label>详细地址</label>
-        <input placeholder="街道地址" type="text" value="{{address}}" bindblur="addrBlur" />
+        <input placeholder="楼层或者房间号" type="text" value="{{address}}" bindblur="addrBlur" />
       </view>
     </view>
 <view class="main2">
   <button class="preserve_addr"  open-type="getUserInfo" class='zh_CN' bindgetuserinfo="bindGetUserInfo">确认并授权</button>
 </view>
-    <view class="footer">
-    	郑州醇简时代有限公司  @2017-2018
-    </view>
 </view>

@@ -42,9 +42,6 @@
               <button class="btn" form-type="submit">去支付</button>
             </form>
           </view>
-          <!-- <view class="buy_again pay" wx:if="{{item.status == 1}}">
-            <button data-gid="{{item.goods_id}}" catchtap="buyAgain">再次购买</button>
-          </view> -->
         </view>
       </view>
     </navigator>

@@ -22,7 +22,7 @@
 		
 		<view class="line"></view>
 
-		<view class="wait-info">
+		<!-- <view class="wait-info">
 			<block wx:for-items="{{array}}" wx:key="name">
 				<view class="wait-info-cell" data-type="{{item.name}}" data-typeid="{{item.typeId}}">
          <picker range='{{customers_type}}' value='{{_id}}' bindchange='bindStartMultiPickerChange' range-key="_id" data-id='{{customers_type[index]._id}}'>
@@ -31,7 +31,7 @@
             </picker>
 				</view>
 			</block>	
-		</view>
+		</view> -->
 
 	</view>
 

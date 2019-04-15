@@ -33,5 +33,4 @@
 			</view>
 		</block>
 	</view>
-	<view class="footer" bindtap="goIndexPage">郑州醇简食代有限公司</view>
 </view>

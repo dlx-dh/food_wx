@@ -37,7 +37,7 @@ Page({
       console.log(event)
       let data = event.currentTarget.dataset
 
-      let goods_amount = this.data.goods_amount || 0
+      let goods_amount = parseFloat(this.data.goods_amount || 0)
       let goods_total = this.data.goods_total || 0
       let goodsInf = this.data.goodsInf
       let menu = goodsInf.find(function (v) {
@@ -46,13 +46,14 @@ Page({
       if (menu.count <= 0)
         return
       menu.count -= 1;
-      goods_amount -= menu.payout||0
+      goods_amount -= parseFloat((menu.payout || 0).toFixed(2))
+      goods_amount = parseFloat(goods_amount.toFixed(2))
       console.log(menu)
       console.log(goodsInf)
       this.setData({
         'goodsInf': goodsInf,
-        'goods_amount': goods_amount.toFixed(2),
-        goods_total: goods_amount.toFixed(2)
+        'goods_amount': goods_amount,
+        goods_total: goods_amount
       })
       wx.hideToast();
     } else {
@@ -78,23 +79,28 @@ Page({
       console.log(event)
       let data = event.currentTarget.dataset
 
-      let goods_amount = this.data.goods_amount || 0
+      let goods_amount = parseFloat(this.data.goods_amount || 0)
       let goods_total = this.data.goods_total || 0
       let goodsInf = this.data.goodsInf
       let menu = goodsInf.find(function (v) {
         return v._id == data.id
       })
-      if (menu.count <= 0)
-        return
       menu.count += 1;
-      goods_amount += (menu.count||1)*(menu.payout||0)
+
+      console.log(goods_amount)
+      console.log(menu.payout)
+      goods_amount += parseFloat((menu.payout || 0).toFixed(2))
+      console.log(goods_amount)
+      goods_amount = parseFloat(goods_amount.toFixed(2))
       console.log('33333333333333333')
       console.log(menu)
       console.log(goodsInf)
+      console.log(goods_amount)
+      
       this.setData({
         'goodsInf': goodsInf,
-        'goods_amount': goods_amount.toFixed(2),
-        goods_total: goods_amount.toFixed(2)
+        'goods_amount': goods_amount,
+        goods_total: goods_amount
       })
       wx.hideToast();
     } else {
@@ -127,7 +133,14 @@ Page({
     // console.log(e)
     var self = this;
     let goodsInf = self.data.goodsInf
-    // if (that.data.addr_flag) {
+    console.log('goodsInf')
+    console.log(goodsInf)
+    console.log(goodsInf.length)
+    var foodNum=0
+    for (let i = 0; i < goodsInf.length; i++) {
+      foodNum += goodsInf[i].count;
+    }
+    if (foodNum>0) {
     wx.getStorage({
       key: "session_id",
       success: function (res) {
@@ -146,16 +159,20 @@ Page({
           method: 'POST',
           header: { 'content-type': 'application/x-www-form-urlencoded' },
           success: function (res, data) {
+            console.log('success /client/to_order')
             console.log(res)
-            console.log(data)
             var order_id = res.data.order_id
             if (res.statusCode == 200) {
               wx.redirectTo({
                 url: '../orderDetails/orderDetails?order_id=' + order_id
               })
             } else if (res.data.result_code == 'FAIL') {
-              self.myToast('提交订单失败!');
+              app.toPoint('提交订单失败！ ')
             }
+          },
+          fail: function (res) {
+            console.log("fail /client/wxpay")
+            app.toPoint('失败 请稍后再试')
           }
         })
       },
@@ -163,52 +180,34 @@ Page({
         console.log("用户登录未登录，获取地址失败!")
       }
     })
-
-
-    // } else {
-    //   that.myToast("请添加收货人地址！");
-    //   setTimeout(function () {
-    //     wx.navigateTo({
-    //       url: '../manageAddrList/manageAddrList'
-    //     })
-    //   }, 2000);
-    // }
+    }else{
+      app.toPoint('你还没有选择任何食品，请先选择')
+    }
   },
   onLoad: function (options) {
     var that = this;
-    wx.getStorage({
-      key: "session_id",
-      success: function (res) {
-        console.log("session_id:")
-        console.log(res.data)
-        var session_id = res.data.session_id;
-
-
+    wx.setNavigationBarTitle({
+      title: "我的订单"
+    })
+    wx.showLoading({
+      title: '加载中...',
+    })
+    app.checkSessionId(this, function (have_session, session_id) {
+      console.log(have_session)
+      if (!have_session) {
+        wx.hideLoading()
+        wx.redirectTo({
+          url: '../../pages/index/index'
+        })
+      } else {
         if (!options['timeid'] || options['timeid'] == "") {
-          console.log('1')
+          wx.hideLoading()
           wx.switchTab({
             url: '../../pages/main/main?err=true'
           })
         } else {
-          console.log('2')
           that.setData({
             timeid: options['timeid'] || 0
-          })
-          var userInfo = app.globalData.userInfo
-          wx.getStorage({
-            key: "session_id",
-            success: function (err, session, ) {
-              console.log('mysession')
-              console.log(err)
-              console.log(session)
-            }
-          })
-          var aaa = wx.getStorageSync('userinfo');
-          console.log('555555555555555555')
-          console.log(aaa)
-          console.log(userInfo)
-          wx.setNavigationBarTitle({
-            title: "我的订单"
           })
           that.setData({
             order_id: options.order_id || 0
@@ -216,9 +215,8 @@ Page({
           wx.getStorage({
             key: "selete_item",
             success: function (res) {
-              console.log('333333333333')
+              wx.hideLoading()
               var seleteItem = res.data.seleteItem;
-              console.log(seleteItem)
               var goods_amount = that.data.goods_amount || 0
               for (var i = 0; i < seleteItem.length; i++) {
                 goods_amount += (seleteItem[i]['count'] || 1) * (seleteItem[i]['payout'] || 0)
@@ -241,51 +239,14 @@ Page({
               }
             },
             error: function (er) {
-              console.log('222222222222')
-              console.log(er)
+              wx.hideLoading()
+              console.log('err  selete_item')
+              app.toPoint('获取订单失败 请稍后再试！ ')
             }
           })
         }
-      },
-      fail: function () {
-        wx.navigateTo({
-          url: "../index/index"
-        })
       }
     })
-  },
-  onShow: function () {
-    var that = this;
-    //获取session
-    wx.getStorage({
-      key: "session",
-      success: function (res) {
-        var session = res.data.session;
-        var url = 'https://shop.llzg.cn/weapp/showaddr.php?act=order&' + "session_id=" + session;
-        wx.request({
-          url: url,
-          data: {},
-          method: 'POST',
-          header: { 'content-type': 'application/x-www-form-urlencoded' },
-          success: function (res) {
-            if (res.data.address == '') {
-              that.setData({
-                addr_flag: false
-              });
-            } else if (res.data.consignee) {
-              that.setData({
-                userAddr: res.data,
-                addr_flag: true
-              });
-            } else {
-              console.log("服务器故障!!")
-            }
-          }
-        })
-      },
-      fail: function (res) {
-        console.log("用户登录未登录，获取地址失败!")
-      }
-    })
+
   }
 })
