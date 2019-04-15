@@ -1,36 +1,38 @@
 <!-- pages/main/main.wxml -->
 <view class="page">
 
-	<view class="banner">
-		<swiper class='swiper_img'  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-		  <block wx:for="{{imgUrls}}" wx:key="*this">
-		    <swiper-item bindtap="goDetail">
-		      <image src="http://www.chunjianshidai.top/product_img/{{item}}" class="slide-image" />
-		    </swiper-item>
-		  </block>
-		</swiper>
-	</view>
-	<view class="separate"></view>
-   <view class="navs">
-      <block wx:for-items="{{navs}}" wx:key="item.typeId">
-          <view class="nav-item" catchtap="catchTapCategory" data-type="{{item.name}}" data-typeid="{{item.typeId}}">
-              <image src="{{item.icon}}"   class="nav-image"/>
-              <text>{{item.name}}</text>
-          </view>
+  <view class="banner">
+    <swiper class='swiper_img' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{imgUrls}}" wx:key="*this">
+        <swiper-item bindtap="goDetail">
+          <image src="http://chunjianshidai.top/product_img/{{item}}" class="slide-image" />
+        </swiper-item>
       </block>
+    </swiper>
+  </view>
+  <view class="separate"></view>
+  <view class="navs">
+    <block wx:for-items="{{navs}}" wx:key="item.typeId">
+      <view class="nav-item" catchtap="catchTapCategory" data-type="{{item.name}}" data-typeid="{{item.typeId}}">
+        <image src="{{item.icon}}" class="nav-image" />
+        <text>{{item.name}}</text>
+      </view>
+    </block>
+  </view>
+  <view class="separate"></view>
+  <block wx:for="{{xlnavs}}" wx:for-index="key" wx:key="item">
+    <view class="title-line">
+      <!-- <view class="title-name">- -</view> -->
+      <view class="title-name-bottom">{{key}}</view>
     </view>
-	<view class="separate"></view>
-	<view class="title-line">
-		<view class="title-name">- -</view>
-		<view class="title-name-bottom">饮食推荐</view>
-	</view>
-	<view class="content">
-		<block wx:for="{{xlnavs}}"  wx:key="item">
-			<view class="content-cell">
-				<image src="http://www.chunjianshidai.top/product_img/{{item.img}}" mode="scaleToFill" binderror="imageError"/>
-				<text class="describe"> {{item.name}}</text>
-				<view style="color: red; font-size: 8pt;" class="price-now"> {{item.body}}</view>
-			</view>
-		</block>
-	</view>
+    <view class="content">
+      <block wx:for="{{item}}" wx:key="item">
+      <view class="content-cell">
+        <image src="http://chunjianshidai.top/product_img/{{item.img}}" mode="scaleToFill" binderror="imageError" />
+        <text class="describe"> {{item.name}}</text>
+        <view style="color: red; font-size: 8pt;" class="price-now"> {{item.body}}</view>
+      </view>
+       </block>
+    </view>
+  </block>
 </view>

@@ -3,9 +3,9 @@ const types = ['default', 'primary', 'warn']
 var app = getApp();
 Page({
   data: {
-    user: "",
-    mobile: "",
-    address: "",
+    user: "234",
+    mobile: "234",
+    address: "234",
     customers: "",
     customers_type: []
   },
@@ -86,18 +86,18 @@ Page({
   bindGetUserInfo: function (res) {
     var userinfo = {};
     var that = this
-    var userName = that.data.user;
-    var userMobile = that.data.mobile;
-    var userAddress = that.data.address;
-    var userCustomers = that.data.customers;
-    if (userName == "" || userMobile == "" || userAddress == "" || userCustomers == "") {
-      wx.showToast({
-        title: '请完成以上信息！',
-        icon: "none",
-        duration: 1500,
-        mask: true
-      });
-    } else {
+    // var userName = that.data.user;
+    // var userMobile = that.data.mobile;
+    // var userAddress = that.data.address;
+    // var userCustomers = that.data.customers;
+    // if (userName == "" || userMobile == "" || userAddress == "" || userCustomers == "") {
+    //   wx.showToast({
+    //     title: '请完成以上信息！',
+    //     icon: "none",
+    //     duration: 1500,
+    //     mask: true
+    //   });
+    // } else {
       try {
         var info = res
         if (res.detail.userInfo) {
@@ -115,10 +115,10 @@ Page({
                     city: info.detail.userInfo.city,
                     province: info.detail.userInfo.province,
                     avatarUrl: info.detail.userInfo.avatarUrl,
-                    name: userName,
-                    address: userAddress,
-                    mobile: userMobile,
-                    cid: userCustomers,
+                    // name: userName,
+                    // address: userAddress,
+                    // mobile: userMobile,
+                    // cid: userCustomers,
                   },
                   header: {
                     'content-type': 'application/json' // 默认值
@@ -141,7 +141,7 @@ Page({
                   },
                   fail: function (err) {
                     console.log('err  /client/user_wx')
-                    // app.toPoint('服务器繁忙 请稍后再试！ ')
+                    app.toPoint('服务器繁忙 请稍后再试！ ')
                     app.toPoint(err)
                   }
                 })
@@ -160,6 +160,6 @@ Page({
       } catch (e) {
         app.toPoint(e)
       }
-    }
+    // }
   }
 })

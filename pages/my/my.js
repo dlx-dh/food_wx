@@ -3,7 +3,7 @@ var app = getApp();
 Page({
   data: {
     userInfo: {},
-    array: []//{ icon: "../../images/icon-new-list1.png", name: "资产", typeId: 0 }
+    array: [{ icon: "../../images/icon-new-list1.png", name: "地址管理", typeId: 0 }]//{ icon: "../../images/icon-new-list1.png", name: "资产", typeId: 0 }
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数

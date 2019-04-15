@@ -6,8 +6,8 @@ Page({
   data: {
     goodsInf: "",
     orderInfList: {},
-    waitpay: false,
-    waitship: false,
+    unpaid: false,
+    paid: false,
     all: true
   },
   getfid: function (e) {
@@ -116,6 +116,7 @@ Page({
     this.getDate({})
   },
   onLoad: function (options) {
+    console.log('manageOrders onload')
     this.getDate(options)
   },
   getDate: function (options){
@@ -136,15 +137,15 @@ Page({
         })
       } else {
         var _url = app.globalData.url + '/client/get_order?user_id=' + session_id;
-        if (options.orderType == 'waitpay') {
-          _url += '&act=waitpay';
+        if (options.t == 'unpaid') {
+          _url += '&act=unpaid';
           that.setData({
-            waitpay: true
+            unpaid: true
           })
-        } else if (options.orderType == 'waitship') {
-          _url += '&act=waitship';
+        } else if (options.t == 'paid') {
+          _url += '&act=paid';
           that.setData({
-            waitship: true
+            paid: true
           })
         } else {
           _url += '&act=all';

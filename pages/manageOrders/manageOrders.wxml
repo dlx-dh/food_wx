@@ -1,13 +1,13 @@
 <view class="container">
-  <view wx:if="{{waitpay}}" class="head">待付款</view>
-  <view wx:if="{{waitship}}" class="head">待收货</view>
+  <view wx:if="{{unpaid}}" class="head">待付款</view>
+  <view wx:if="{{paid}}" class="head">已支付</view>
   <view wx:if="{{all}}" class="head">全部订单</view>
   <block wx:for="{{orderInfList}}" wx:key="{{id}}">
     <navigator url="../orderDetails/orderDetails?order_id={{item.order_id}}">
       <view class="goods_item">
         <block wx:for="{{item.list}}" wx:key="id" wx:for-item="dish">
           <view class="gi_goods">
-            <image src="http://www.chunjianshidai.top/product_img/{{dish.icon}}"></image>
+            <image src="http://chunjianshidai.top/product_img/{{dish.icon}}"></image>
             <view class="gi_goods_options">
               <text class="goods_name">{{dish.title}}</text>
               <!-- <text class="goods_rule">规格：{{dish.payout}}</text> -->
@@ -47,8 +47,8 @@
     </navigator>
   </block>
   <block wx:if="{{orderInfList.length == 0}}">
-    <text wx:if="{{waitpay}}" class="inf">您暂时还没有待付款订单</text>
-    <text wx:if="{{waitship}}" class="inf">您暂时还没有待收货订单</text>
+    <text wx:if="{{unpaid}}" class="inf">您暂时还没有待付款订单</text>
+    <text wx:if="{{paid}}" class="inf">您暂时还没有已支付订单</text>
     <text wx:if="{{all}}" class="inf">您暂时还没有订单</text>
   </block>
 </view>

@@ -26,24 +26,68 @@ App({
   },
   checkSessionId: function (self, cb) {
     console.log('checkSessionId')
-    console.log("page:" + self.route)
     wx.getStorage({
       key: "session_id",
       success: function (res) {
         console.log("session_id:")
         console.log(res.data)
         var session_id = res.data.session_id;
-
         if (session_id && session_id != "") {
-          cb(true,session_id)
+          cb(true, session_id)
         } else {
-          cb(false,session_id)
+          cb(false, session_id)
         }
       },
       fail: function () {
-        cb(false,null)
+        cb(false, null)
       }
     })
+  },
+
+  getWxInfo: function (user_id,type,cb) {
+    var that = this
+    console.log('getWxInfo  getWxInfo： ' + user_id)
+    var wxInfo = that.globalData[type];
+    console.log('555555555555555555555555555555555555')
+    console.log(wxInfo)
+    if (wxInfo) {
+      wx.request({
+        url: that.globalData.url + '/client/wx_info?user_id=' + user_id,
+        method: "GET",
+        data: {},
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          console.log('1333333333333333333333333333333')
+          console.log(res.data)
+          that.globalData['peice'] = res.data['peice']
+          that.globalData['seting'] = res.data['seting']
+          that.globalData['user'] = res.data['user']
+        },
+      })
+      cb(wxInfo)
+    } else {
+      wx.request({
+        url: that.globalData.url + '/client/wx_info?user_id=' + user_id,
+        method: "GET",
+        data: {},
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          console.log('2333333333333333333333333333333')
+          console.log(res.data)
+          that.globalData['peice'] = res.data['peice']
+          that.globalData['seting'] = res.data['seting']
+          that.globalData['user'] = res.data['user']
+          cb(that.globalData[type])
+        },
+        fail: function (err) {
+          cb({})
+        }
+      })
+    }
   },
   UserInfo: function (cb) {
     var that = this
@@ -52,16 +96,16 @@ App({
       typeof cb == "function" && cb(this.globalData.userInfo)
     } else {
       //调用登录接口
-          wx.getUserInfo({
-            success: function (res) {
-              console.log(res)
-              that.globalData.userInfo = res.userInfo
-              typeof cb == "function" && cb(that.globalData.userInfo)
-            }
-          })
+      wx.getUserInfo({
+        success: function (res) {
+          console.log(res)
+          that.globalData.userInfo = res.userInfo
+          typeof cb == "function" && cb(that.globalData.userInfo)
+        }
+      })
     }
   },
-  toPoint:function(meg){
+  toPoint: function (meg) {
     console.log(meg)
     wx.showToast({
       title: meg,

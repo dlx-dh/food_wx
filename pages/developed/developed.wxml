@@ -1,2 +1,4 @@
 <!--pages/developed/developed.wxml-->
-<text>该页面不发显示！工程师正在玩命开发中！</text>
+<view class="classname">
+  <image class='image' mode='widthFix' src='../../images/password.gif'></image>
+</view> 

@@ -4,6 +4,8 @@ var app = getApp();
 Page({
   data: {
     goods_total: '',
+    goods_lessen: '',
+    goods_amount: '',
     shipping_fee: 0,
     order_id: ''
   },
@@ -144,7 +146,9 @@ Page({
               that.setData({
                 orderInf: res.data[0],
                 order_id: res.data[0]._id,
-                goods_total: res.data[0].total_fee.toFixed(2),
+                goods_total: res.data[0].price_total.toFixed(2),
+                goods_lessen: res.data[0].price_lessen.toFixed(2),
+                goods_amount: res.data[0].price_amount.toFixed(2),
                 shipping_fee: 0
               })
             },

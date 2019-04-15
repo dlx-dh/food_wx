@@ -1,14 +1,17 @@
 {
   "pages": [
+    "pages/main/main",
+    "pages/user/user",
     "pages/index/index",
+    "pages/address-edit/address-edit",
+    "pages/manageOrders/manageOrders",
+    "pages/developed/developed",
+    "pages/my/my",
     "pages/selectFood/index",
     "pages/myOrder/myOrder",
     "pages/orderDetails/orderDetails",
-    "pages/main/main",
-    "pages/my/my",
-    "pages/manageOrders/manageOrders",
-    "pages/developed/developed",
-    "pages/Order/cert/cert"
+    "pages/Order/cert/cert",
+    "pages/manageAddr/manageAddr"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -34,7 +37,7 @@
         "selectedIconPath": "images/购物车-selected.png"
       },
       {
-        "pagePath": "pages/my/my",
+        "pagePath": "pages/user/user",
         "text": "我的",
         "iconPath": "images/我.png",
         "selectedIconPath": "images/我-selected.png"

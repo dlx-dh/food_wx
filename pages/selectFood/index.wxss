@@ -2,7 +2,37 @@
   width: 100%;
   height: 100%
 }
+.price1 {
+  width: 100%;
+  height: 80rpx;
+  background-color:white;
+  border-bottom:2rpx solid #ccc;
+}
 
+
+.view_hide{
+    display: none;
+}
+.view_show{
+    display: block;
+}
+
+.price1 .coupon1 {
+  display: inline-block;
+  float: left;
+  width: 50rpx;
+  height: 50rpx;
+  padding-top: 4rpx;
+  margin-right: 10rpx;
+  background: #00b7ee;
+  line-height: 46rpx;
+  vertical-align: middle;
+  text-align: center;
+  color: #fff;
+  font-size: 33rpx;
+  font-style: normal;
+  border-radius: 5rpx;
+}
 /*tab导航*/
 .swiper-item{
   display: block;
