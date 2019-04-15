@@ -1,0 +1,57 @@
+<view class="container">
+  <view wx:if="{{waitpay}}" class="head">待付款</view>
+  <view wx:if="{{waitship}}" class="head">待收货</view>
+  <view wx:if="{{all}}" class="head">全部订单</view>
+  <block wx:for="{{orderInfList}}" wx:key="{{id}}">
+    <navigator url="../orderDetails/orderDetails?order_id={{item.order_id}}">
+      <view class="goods_item">
+        <block wx:for="{{item.list}}" wx:key="id" wx:for-item="dish">
+          <view class="gi_goods">
+            <image src="http://www.chunjianshidai.top/product_img/{{dish.icon}}"></image>
+            <view class="gi_goods_options">
+              <text class="goods_name">{{dish.title}}</text>
+              <!-- <text class="goods_rule">规格：{{dish.payout}}</text> -->
+              <view class="goods_price">￥{{dish.payout}}
+                <text>×{{dish.count}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+        <view class="goods_pay">
+          <view class="item">
+            状态：
+            <text>{{item.payout?'已支付':'未支付'}}</text>
+          </view>
+          <view class="item">
+            总价：
+            <text>￥{{item.total_fee}}</text>
+          </view>
+          
+          <view class="item">
+            备注：
+            <text>{{item.user_msg?item.user_msg:"无"}}</text>
+          </view>
+          
+          <view class="item">
+            订单时间：
+            <text>{{item._at}}</text>
+          </view>
+
+          <view class="wx_pay pay" wx:if="{{item.status == 0}}" data-oid="{{item._id}}" catchtap="wxpay">
+            <form report-submit="true" bindsubmit="getfid">
+              <button class="btn" form-type="submit">去支付</button>
+            </form>
+          </view>
+          <!-- <view class="buy_again pay" wx:if="{{item.status == 1}}">
+            <button data-gid="{{item.goods_id}}" catchtap="buyAgain">再次购买</button>
+          </view> -->
+        </view>
+      </view>
+    </navigator>
+  </block>
+  <block wx:if="{{orderInfList.length == 0}}">
+    <text wx:if="{{waitpay}}" class="inf">您暂时还没有待付款订单</text>
+    <text wx:if="{{waitship}}" class="inf">您暂时还没有待收货订单</text>
+    <text wx:if="{{all}}" class="inf">您暂时还没有订单</text>
+  </block>
+</view>

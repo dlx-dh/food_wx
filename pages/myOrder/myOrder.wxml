@@ -1,0 +1,50 @@
+<view class="container1">
+  <view class="goods_inf">
+    <block wx:for="{{goodsInf}}" wx:key="id"  wx:for-item="dish">
+      <view class="gi_goods">
+        <image src="http://www.chunjianshidai.top/product_img/{{dish.icon}}"></image>
+        <view class="gi_goods_options">
+          <text class="goods_name">{{dish.title}}</text>
+          <!-- <text class="goods_rule">规格：{{dish.payout}}</text> -->
+          <view class="goods_price">￥{{dish.payout}}
+            <text>×{{dish.count}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="goods_count">
+        <text class="gc_title">购买数量</text>
+        <view class="gc_cont">
+          <view class="minus" data-id="{{dish._id}}" bindtap="bindMinus">
+            <image mode="widthFix" src="{{dish.count>=1?'../../images/minus_yes.jpg':'../../images/minus_no.jpg'}}"></image>
+          </view>
+          <text class="num">{{dish.count}}</text>
+          <view class="plus" data-id="{{dish._id}}" bindtap="bindPlus">
+            <image mode="widthFix"    src="../../images/plus.jpg"></image>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="user_message">
+      <text>买家留言</text>
+      <textarea placeholder="请留下您的宝贵意见（40字以内）" placeholder-style="line-height:60rpx;z-index:0" maxlength="40" bindblur="bindUserMsg" bindinput="bingInputForUserMag"/>
+    </view>
+    <view class="gi_price gi_item">
+      <text class="gi_l">商品金额</text>
+      <text class="gi_r">￥{{goods_total}}</text>
+    </view>
+  </view>
+  <view class="wx_pay_cont">
+    <view class="total_fee">实付金额：
+      <text>￥{{goods_amount}}</text>
+    </view>
+    <view class="wx_pay">
+      <form report-submit="true" bindsubmit='toWXPay'>
+        <button form-type="submit">微信支付</button>
+      </form>
+    </view>
+  </view>
+</view>
+<view hidden="{{warnInf?false:true}}" class="mytoast">
+  <icon type="warn" size="40" color="white" />
+  <view>{{warnInf}}</view>
+</view>

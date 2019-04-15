@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/myOrder/myOrder",
+    "pages/component/index",
+    "pages/orderDetails/orderDetails",
+    "pages/index/index",
+    "pages/main/main",
+    "pages/my/my",
+    "pages/manageOrders/manageOrders",
+    "pages/developed/developed",
+    "pages/Order/cert/cert"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "醇简时代",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#515151",
+    "selectedColor": "#09bb07",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/main/main",
+        "text": "首页",
+        "iconPath": "images/main.png",
+        "selectedIconPath": "images/selectedMain.png"
+      },
+      {
+        "pagePath": "pages/manageOrders/manageOrders",
+        "text": "全部订单",
+        "iconPath": "images/购物车.png",
+        "selectedIconPath": "images/购物车-selected.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "images/我.png",
+        "selectedIconPath": "images/我-selected.png"
+      }
+    ]
+  },
+  "debug": true
+}

@@ -1,0 +1,38 @@
+<!-- <import src="../../template/img-loader/img-loader.wxml"/>
+<template is="img-loader" data="{{ imgLoadList }}"></template>
+ -->
+<view class="page" bindtap="goMainPage">
+    <view class="header">
+        <image src="../../images/chunjianshidai.png" open-type="getUserInfo"  bindtap='onGo' ></image>
+    </view>
+    <view class="content">
+    	<view class="num0">简食主义，健康生活</view> 
+    </view>
+    <view class="main">
+      <view class="addr_item">
+        <label>收货人</label>
+        <input placeholder="姓名" type="text" value="{{user}}" bindblur="userBlur" />
+      </view>
+      <view class="addr_item">
+        <label>联系方式</label>
+        <input placeholder="手机号码" type="number" maxlength="11" value="{{mobile}}" bindblur="mobileBlur" />
+      </view>
+      <view class="addr_item full_addr">
+        <picker range='{{customers_type}}' value='{{_id}}' bindchange='bindStartMultiPickerChange' range-key="_id" data-id='{{customers_type[index]._id}}'>
+          <label>区域选择</label>
+          <view class="picker">{{customers}}</view>
+          <!-- <input placeholder="区域地址" type="text" value="{{customers}}" /> -->
+        </picker>
+      </view>
+      <view class="addr_item full_addr">
+        <label>详细地址</label>
+        <input placeholder="街道地址" type="text" value="{{address}}" bindblur="addrBlur" />
+      </view>
+    </view>
+<view class="main2">
+  <button class="preserve_addr"  open-type="getUserInfo" class='zh_CN' bindgetuserinfo="bindGetUserInfo">确认并授权</button>
+</view>
+    <view class="footer">
+    	郑州醇简时代有限公司  @2017-2018
+    </view>
+</view>

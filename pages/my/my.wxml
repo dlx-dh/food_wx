@@ -1,0 +1,38 @@
+<!--pages/my/my.wxml-->
+<view class="page">
+	<view class="header">
+		<view class="userInfo">
+			<image src="{{userInfo.avatarUrl}}" class="userinfo-avatar" background-size="cover" />
+			<text class="userinfo-nickname">{{userInfo.nickName}}</text>
+		</view>
+	</view>
+
+	<view class="content">
+		<view class="all-order"  bindtap="goAllOrder">
+			<view>
+				<image src="" />
+				<text class="all-order-word">全部订单</text>
+			</view>
+			<view>
+				<text class="look-all-order">查看全部订单</text>
+				<text class="corner">></text>	
+			</view>
+			
+		</view>
+		
+		<view class="line"></view>
+
+		<view class="wait-info">
+			<block wx:for-items="{{array}}" wx:key="name">
+				<view class="wait-info-cell" data-type="{{item.name}}" data-typeid="{{item.typeId}}">
+         <picker range='{{customers_type}}' value='{{_id}}' bindchange='bindStartMultiPickerChange' range-key="_id" data-id='{{customers_type[index]._id}}'>
+            <image src="{{item.icon}}"></image>
+            <view>{{item.name}}</view>
+            </picker>
+				</view>
+			</block>	
+		</view>
+
+	</view>
+
+</view>

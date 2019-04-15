@@ -1,0 +1,66 @@
+
+.header {
+	width: 220rpx;
+	padding-top:40rpx;
+	margin-left: 265rpx;
+  margin-bottom: 40rpx;
+}
+
+.header image {
+	width: 220rpx;
+	height: 220rpx;
+	border: 1px solid #fff;
+	border-radius: 110rpx;
+	box-shadow: 2rpx 2rpx 2rpx #625c52;
+	line-height: 220rpx;
+}
+
+.title {
+	font-size: 50rpx;
+	padding-top: 50rpx;
+	text-align: center;
+	color: #303030;
+}
+
+.content {
+	margin-top: 40rpx;
+	color: #37444b;
+	text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.content .num0 {
+	padding-top: 20rpx;
+}
+
+.content .num1 {
+	margin-top: 45rpx;
+}
+
+.footer {
+	color: #e1dbcd;
+	font-size: 25rpx;
+	margin-top: 400rpx;
+	text-align:center;
+}
+
+.click_shou_quan {
+   width: 300px;
+   display: flex;
+  justify-content: center;
+}
+
+.main{background:#fff;border-top:1px solid #eee;padding-left:20rpx;}
+.addr_item,.picker_item{border-bottom:1px solid #eee;box-sizing:border-box;}
+.full_addr{border:none;}
+.addr_item label,.picker_item text{display:inline-block;width:20%;font-size:30rpx;line-height:80rpx;color:#353535;vertical-align: top;}
+.addr_item input,.picker_item picker{display:inline-block;width:80%;background:transparent;border:none;font-size:30rpx;line-height:80rpx;color:#999;height:80rpx;}
+
+.addr_item .picker,.picker_item picker{display:inline-block;width:80%;background:transparent;border:none;font-size:30rpx;line-height:80rpx;color:#999;height:80rpx;}
+
+
+.main2{margin-top:80rpx;}
+.set_default{padding-left:20rpx;background:#fff;margin-bottom:80rpx;position:relative;}
+.set_default text{display:inline-block;width:20%;font-size:30rpx;line-height:80rpx;color:#353535;vertical-align: top;}
+.main2 button{ background:#01bb20;color:#fff;width:90%;height:80rpx;font-size:40rpx;line-height:80rpx;text-align:center;margin-bottom:30rpx;}
+
