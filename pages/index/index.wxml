@@ -26,7 +26,7 @@
       </view>
       <view class="addr_item full_addr">
         <label>详细地址</label>
-        <input placeholder="楼层或者房间号" type="text" value="{{address}}" bindblur="addrBlur" />
+        <input placeholder="楼层或房间号" type="text" value="{{address}}" bindblur="addrBlur" />
       </view>
     </view>
 <view class="main2">

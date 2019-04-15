@@ -11,7 +11,6 @@ Page({
   },
   onLoad: function (options) {
     var self = this;
-    console.log('33333333')
     // wx.clearStorage()
     wx.getStorage({
       key: "session_id",
@@ -149,6 +148,10 @@ Page({
               } else {
                 app.toPoint('授权失败')
               }
+            },
+            fail:function(err){
+              app.toPoint('登录失败！')
+              app.toPoint(err)
             }
           })
         } else {

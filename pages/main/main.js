@@ -29,8 +29,6 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-
-    wx.clearStorage()
     app.checkSessionId(this, function (have_session) {
       console.log('aaaaa')
       wx.hideLoading()
@@ -67,7 +65,7 @@ Page({
     var time = new Date();
     var hour = time.getHours()
     // if ((typeid == 0 && (hour > 8 && hour < 10)) || (typeid == 1&&(hour > 14 && hour < 18))) {
-    if ((typeid == 0) || (typeid == 1)) {
+    if (((typeid == 0) || (typeid == 1)) && (hour >= 10 && hour <= 20)) {
       wx.navigateTo({
         url: '../../pages/selectFood/index?timeid=' + typeid,
         success: function (res) {
@@ -92,7 +90,7 @@ Page({
         })
       } else {
         wx.showToast({
-          title: '点餐已结束 时间为:中餐：8：00-10:00 晚餐：14:00-18:00',
+          title: '点餐已结束 时间为:10:30-20:00',
           icon: "none",
           duration: 5000,
           mask: true
